@@ -1,0 +1,45 @@
+
+<div class="row">
+    <div class="col-lg-6">
+    <div class="card bg-light mb-3">
+        <div class="card-header">Header</div>
+        <div class="card-body dashboard-card-table-container">
+            <table class="table fixed_header">
+                <thead>
+                    <tr class="table-primary">
+                        <th scope="col">Date</th>
+                        <th scope="col">Balance Change</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngIf="dateBalances?.length; else elseBlock">
+                        <tr app-date-balance *ngFor="let dateBalance of dateBalances; let i = index" [dateBalance]="dateBalance">
+                        </tr>
+                    </ng-container>
+                    <ng-template #elseBlock>
+                        <tr>
+                            <td colspan="5" class="text-center">No Transactions found</td>
+                        </tr>
+                    </ng-template>
+                </tbody>
+            </table>
+            <button class="btn btn-outline-primary btn-sm me-2" (click)="firstPage()">«</button>
+            <button class="btn btn-outline-primary btn-sm me-2" (click)="prevPage()">&#60; Prev</button>
+            <button class="btn btn-outline-primary btn-sm me-2" (click)="nextPage()">Next &#62;</button>
+            <button class="btn btn-outline-primary btn-sm me-2" (click)="lastPage()">»</button>
+        </div>
+    </div>
+</div>
+</div>
+<!--
+    <row-component *ngFor="let qlines of qlineModel" [qline]="qlines">
+    </row-component>
+
+
+    <tr rowComponent *ngFor="let qlines of qlineModel" [qline]="qlines">
+
+
+                
+    <tr dateBalance *ngFor="let dateBalance of dateBalances; let i = index">
+    </tr>
+-->

@@ -1,0 +1,4 @@
+.dashboard-card-table-container {
+    max-height: 24rem;
+    overflow: auto;
+}
