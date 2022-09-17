@@ -1,15 +1,16 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { DateBalance } from 'src/app/date-balance';
-import { transaction } from 'src/app/transaction';
 
 @Component({
     selector: 'app-date-table',
     templateUrl: './date-table.component.html',
-    styleUrls: ['./date-table.component.css']
+    styleUrls: ['./date-table.component.scss']
 })
 export class DateTableComponent implements OnInit {
     @Input() allData?: Array<[string, number]>;
-    
+    @Input() cardHeader?: string;
+    @Input() headerClasses?: string;
+
+    Math = Math;
     currentPageNum: number = 0;
     rowsPerPage: number = 5;
     dateBalances?: Array<[string, number]> = [];
@@ -27,7 +28,6 @@ export class DateTableComponent implements OnInit {
             this.currentPageNum += 1;
             this.setDateBalances();
         }
-        
     }
 
     prevPage(): void {
@@ -35,7 +35,6 @@ export class DateTableComponent implements OnInit {
             this.currentPageNum -= 1;
             this.setDateBalances();
         }
-        
     }
 
     firstPage(): void {
@@ -44,14 +43,20 @@ export class DateTableComponent implements OnInit {
     }
 
     lastPage(): void {
-        this.currentPageNum = 1;
+        this.currentPageNum = Math.floor(this.allData?.length! / this.rowsPerPage);
         this.setDateBalances();
     }
 
+    canGoBack(): boolean {
+        return this.currentPageNum > 0;
+    }
+
+    canGoForward(): boolean {
+        return this.currentPageNum < Math.floor(this.allData?.length! / this.rowsPerPage)
+    }
+
     ngOnInit(): void {
-        
         this.dateBalances = this.allData?.slice(0, 5);
-        console.log(this.allData);
     }
 
 }

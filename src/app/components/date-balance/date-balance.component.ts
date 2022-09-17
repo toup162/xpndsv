@@ -4,7 +4,7 @@ import { DateBalance } from 'src/app/date-balance';
 @Component({
     selector: 'tr [app-date-balance]',
     templateUrl: './date-balance.component.html',
-    styleUrls: ['./date-balance.component.css']
+    styleUrls: ['./date-balance.component.scss']
 })
 export class DateBalanceComponent implements OnInit {
     @Input() dateBalance?: [string, number];

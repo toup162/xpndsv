@@ -1,44 +1,103 @@
-<div class="container">
+<div class="container mt-5">
 
-    <label class="btn btn-outline-primary">
+    <label class="btn btn-primary">
         <input type="file" name="file" class="btn btn-primary" id="inputGroupFile" required (change)="handleImport($event)"
             accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
-        Upload CSV
+        + Upload CSV
     </label >
 
+    <div class="row">
+        <div class="col-lg-6">
+            <app-pie-chart [categorizedTransactionsArray]="categorizedTransactionsArray" ></app-pie-chart>
+        </div>
+
+        <div class="col-lg-6">
+            <app-grand-total-balance [grandTotalBalance]="grandTotalBalanceNumber" ></app-grand-total-balance>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <app-bar-chart [totalsByDateMap]="totalsByDateMap" ></app-bar-chart>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-6">
+            <app-date-table
+                [allData]="datesSortedByExpenseArray"
+                [cardHeader]="'Dates with highest expenses'"
+                [headerClasses]="'table-danger'"
+            >
+            </app-date-table>
+        </div>
+        <div class="col-lg-6">
+            <app-date-table
+                [allData]="datesWithPositiveBalanceArray"
+                [cardHeader]="'Dates with positive balance change'"
+                [headerClasses]="'table-success'"
+            >
+            </app-date-table>
+        </div>
+    </div>
+    
+    
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card bg-light mb-3 mt-3">
+                <div class="card-header">Daily Expense Chart</div>
+                <div class="card-body dashboard-card-table-container">
+                    <ngx-datatable
+                        [rows]="rows"
+                        [columns]="columns"
+                        [limit]="2"
+                        [columnMode]="'force'"
+                        [headerHeight]="50"
+                        [footerHeight]="50"
+                        rowHeight="auto"
+                    >
+                    </ngx-datatable>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-lg-12">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Transaction Date</th>
+                        <th scope="col">Post Date</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngIf="transactions.length; else elseBlock">
+                        <tr *ngFor="let transaction of transactions; let i = index;">
+                            <td>{{ transaction.transactionDate }}</td>
+                            <td>{{ transaction.postDate }}</td>
+                            <td>{{ transaction.desc }}</td>
+                            <td>{{ transaction.category }}</td>
+                            <td>{{ transaction.type }}</td>
+                            <td>{{ transaction.amount }}</td>
+                        </tr>
+                    </ng-container>
+                    <ng-template #elseBlock>
+                        <tr>
+                            <td colspan="6" class="text-center">No Transactions found</td>
+                        </tr>
+                    </ng-template>
+                </tbody>
+            </table>
+        </div>
+    </div>
     
 
-
-    <app-date-table [allData]="daysSortedByExpenseMap"></app-date-table>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">Transaction Date</th>
-                <th scope="col">Post Date</th>
-                <th scope="col">Description</th>
-                <th scope="col">Category</th>
-                <th scope="col">Type</th>
-                <th scope="col">Amount</th>
-            </tr>
-        </thead>
-        <tbody>
-            <ng-container *ngIf="transactions.length; else elseBlock">
-                <tr *ngFor="let transaction of transactions; let i = index;">
-                    <td>{{ transaction.transactionDate }}</td>
-                    <td>{{ transaction.postDate }}</td>
-                    <td>{{ transaction.desc }}</td>
-                    <td>{{ transaction.category }}</td>
-                    <td>{{ transaction.type }}</td>
-                    <td>{{ transaction.amount }}</td>
-                </tr>
-            </ng-container>
-            <ng-template #elseBlock>
-                <tr>
-                    <td colspan="6" class="text-center">No Transactions found</td>
-                </tr>
-            </ng-template>
-        </tbody>
-    </table>
+    
 
 </div>

@@ -1,0 +1,44 @@
+input[type="file"] {
+    display: none;
+}
+
+.custom-file-upload {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+
+.datatable-icon-left::before {
+    content: '5';
+}
+
+.datatable-icon-left {
+    color: red;
+}
+
+:host ::ng-deep a i {
+    position: relative;
+    top: 3px;
+}
+
+:host ::ng-deep .datatable-pager a {
+    border: 1px solid #3d3d3d;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+    border-radius: 0.25rem;
+    text-decoration: none;
+    color: #fff;
+    min-width: 34px;
+    text-align: center;
+}
+
+:host ::ng-deep .datatable-pager li.disabled a {
+    border: 1px solid #3d3d3d;
+    color: #8a8a8a;
+}
+
+:host ::ng-deep .ngx-datatable .datatable-footer .datatable-pager li.pages.active a {
+    background: #2a9fd6;
+    cursor: default;
+}
