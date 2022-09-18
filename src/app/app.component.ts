@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { read, utils } from 'xlsx';
 import { transaction } from './transaction';
-import TEST_DATA from './test-data';
 import { NgxSmartModalService } from 'ngx-smart-modal';
 
 @Component({
