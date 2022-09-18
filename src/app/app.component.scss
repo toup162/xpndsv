@@ -41,6 +41,18 @@ input[type="file"] {
     max-width: 100%
 }
 
+.hero-container {
+    background-color: #222529;
+}
+
+.hero-container img {
+    box-shadow: 0 1rem 3rem rgb(0 0 0 / 80%) !important;
+}
+
+.credits {
+    color: #4d4d4d;
+    font-style: italic;
+}
     
 :host ::ng-deep .datatable-pager a {
     border: 1px solid #3d3d3d;

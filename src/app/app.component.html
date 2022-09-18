@@ -1,13 +1,33 @@
-<div class="container mt-5">
-    <div *ngIf="!transactions?.length">
-        <label class="btn btn-primary">
-            <input type="file" name="file" class="btn btn-primary" id="inputGroupFile" required (change)="handleImport($event)"
-                accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
-            + Upload CSV
-        </label >
+
+<div *ngIf="!transactions?.length">
+    <div class="px-4 pt-5 mt-5 text-center hero-container">
+        <h1 class="display-4 fw-bold">xpndsv</h1>
+        <div class="col-lg-6 mx-auto">
+            <p class="lead mb-4">Get a detailed, insightful expense report.</p>
+            <div class="d-sm-flex justify-content-sm-center mb-5">
+                <label class="btn btn-primary btn-lg">
+                    <input type="file" name="file" class="btn btn-primary btn-lg" id="inputGroupFile" required (change)="handleImport($event)"
+                        accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+                    <i class="fa-solid fa-upload me-1"></i> Upload File
+                </label >
+            </div>
+        </div>
+        <div class="overflow-hidden" style="max-height: 30vh;">
+            <div class="container px-5">
+                <img src="../assets/screenshot.png" class="img-fluid rounded-3 mb-4" alt="Example image" width="700" height="500" loading="lazy">
+            </div>
+        </div>
     </div>
-    <div *ngIf="transactions?.length">
+    
+    <div class="text-end mt-4 me-4 credits">
+        Created by Matthew Blair
+    </div>
+</div>
+
+<div *ngIf="transactions?.length">
+    <div class="container mt-5">
         
+            
         <button class="btn btn-outline-dark" (click)="closeReport()">&#60; Back</button>
 
         <div class="row">
@@ -26,7 +46,7 @@
             </div>
         </div>    
         
-        <div class="row mb-5">
+        <div class="row mb-1">
             <div class="col-lg-12">
                 <app-rich-table
                     [allTransactions]="transactions"
@@ -38,8 +58,13 @@
             </app-rich-table>
             </div>
         </div>
+
+        <div class="text-end mt-4 mb-5 pb-4 me-4 credits">
+            Created by Matthew Blair
+        </div>
     </div>
 </div>
+
 
 <ngx-smart-modal
     #myModal
