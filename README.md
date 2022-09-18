@@ -1,27 +1,44 @@
-# Xpndsv
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.2.
+# xpndsv
 
-## Development server
+xpndsv *( /ikˈspensiv/ )* is a webtool for visualizing expense data.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Users can upload a `.csv` report provided by their bank and gather valuable insights about their expenses.
 
-## Code scaffolding
+## Notable Features
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+ - A Dashboard view to quickly consume a wholistic view of expenses.
+   ![screenshot](https://user-images.githubusercontent.com/11641649/190917772-58db9f50-89cf-440b-bbef-b5e8d8fd917a.png)
 
-## Build
+ - Powerful drilldown capabilities on every graph and table allows a granular view of expenses.
+   ![screenshot2](https://user-images.githubusercontent.com/11641649/190918203-f06490ef-2fd3-4b48-bdb5-0f5764ff58cd.png)
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Technology
 
-## Running unit tests
+xpndsv is built with [Angular 2](https://v14.angular.io/). Some other notable technologies and libraries include:
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+- [Bootstrap 5](https://getbootstrap.com/docs/5.2/getting-started/introduction/)
+- [ngx-echarts](https://www.npmjs.com/package/ngx-echarts) (Angular directive for [echarts](https://github.com/apache/echarts))
+- [ngx-datatable](https://swimlane.github.io/ngx-datatable/)
 
-## Running end-to-end tests
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## Local Installation
 
-## Further help
+Install the necessary packages. 
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+```bash
+npm install
+```
+
+Serve the application locally.
+```bash
+ng serve --open
+```
+
+
+## Contributing
+Pull requests are welcome. For major changes, please open an issue first to discuss what you want to change.
+
+
+## License
+[MIT](https://choosealicense.com/licenses/mit/)
