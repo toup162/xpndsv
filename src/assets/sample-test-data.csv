@@ -1,0 +1,4 @@
+transactionDate,postDate,desc,category,type,amount
+05/18/2022,05/20/2022,ACME Grocery #1541021,Grocery,Sale,-1.72
+05/19/2022,05/22/2022,SHELL OIL,Gas,Sale,-41.83
+05/23/2022,05/24/2022,ETSY,Gas,Sale,-14.11
