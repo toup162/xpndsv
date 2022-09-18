@@ -10,12 +10,18 @@ import { DarkChart } from '../bar-chart/dark-chart';
 export class PieChartComponent implements OnInit {
     
     @Input() categorizedTransactionsArray?: {name: string, value: number}[];
-    
+    @Input() openModalWithFilter?: any;
+
     theme!: string | ThemeOption;
     darkTheme = DarkChart;
     options: any;
 
     constructor() { }
+
+    onChartEvent = (event: any, columnName: string) => {
+        this.openModalWithFilter(columnName, event?.name)
+        return;
+    }
 
     ngOnInit(): void {
         this.theme = this.darkTheme;

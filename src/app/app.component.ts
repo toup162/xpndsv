@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { read, utils } from 'xlsx';
 import { transaction } from './transaction';
 import TEST_DATA from './test-data';
+import { NgxSmartModalService } from 'ngx-smart-modal';
 
 @Component({
     selector: 'app-root',
@@ -10,75 +11,21 @@ import TEST_DATA from './test-data';
 })
 export class AppComponent {
     title: string = 'xpndsv';
-    /* TESTING */
-    transactions: transaction[] = TEST_DATA;
-    transactionsByDateMap = this.transactionsByDate(this.transactions);
-    totalsByDateMap = this.totalsByDate(this.transactionsByDateMap);
-    datesSortedByExpenseArray = this.datesSortedByExpense(this.totalsByDateMap);
-    datesWithPositiveBalanceArray = this.datesWithPositiveBalance(this.totalsByDateMap);
-    categorizedTransactionsArray = this.categorizedTransactions();
-    grandTotalBalanceNumber = this.grandTotalBalance();
+    transactions: transaction[] = [];
+
+    transactionsByDateMap: any;
+    totalsByDateMap: any;
+    datesSortedByExpenseArray: any;
+    datesWithPositiveBalanceArray: any;
+    categorizedTransactionsArray: any;
+    grandTotalBalanceNumber: any;
+    columnsData: any;
+
+    modalTableRowData: transaction[] = [];
+    selectedFilter: any = {column: '', value: ''};
     
-    rows = [
-        { name: 'Austin', gender: 'Male', company: 'Swimlane' },
-        { name: 'Dany', gender: 'Male', company: 'KFC' },
-        { name: 'Molly', gender: 'Female', company: 'Burger King' },
-        { name: 'Molly', gender: 'Female', company: 'Burger King' },
-        { name: 'Molly', gender: 'Female', company: 'Burger King' },
-        { name: 'Molly', gender: 'Female', company: 'Burger King' },
-        { name: 'Molly', gender: 'Female', company: 'Burger King' },
-        { name: 'Molly', gender: 'Female', company: 'Burger King' },
-        { name: 'Molly', gender: 'Female', company: 'Burger King' },
-        { name: 'Molly', gender: 'Female', company: 'Burger King' },
-        { name: 'Molly', gender: 'Female', company: 'Burger King' },
-        { name: 'Molly', gender: 'Female', company: 'Burger King' },
-        { name: 'Molly', gender: 'Female', company: 'Burger King' },
-        { name: 'Molly', gender: 'Female', company: 'Burger King' },
-        { name: 'Molly', gender: 'Female', company: 'Burger King' },
-        { name: 'Molly', gender: 'Female', company: 'Burger King' },
-        { name: 'Molly', gender: 'Female', company: 'Burger King' },
-        { name: 'Molly', gender: 'Female', company: 'Burger King' },
-        { name: 'Molly', gender: 'Female', company: 'Burger King' },
-        { name: 'Molly', gender: 'Female', company: 'Burger King' },
-        { name: 'Molly', gender: 'Female', company: 'Burger King' },
-        { name: 'Molly', gender: 'Female', company: 'Burger King' },
-        { name: 'Molly', gender: 'Female', company: 'Burger King' },
-        { name: 'Molly', gender: 'Female', company: 'Burger King' },
-        { name: 'Molly', gender: 'Female', company: 'Burger King' },
-        { name: 'Molly', gender: 'Female', company: 'Burger King' },
-        { name: 'Molly', gender: 'Female', company: 'Burger King' },
-        { name: 'Molly', gender: 'Female', company: 'Burger King' },
-        { name: 'Molly', gender: 'Female', company: 'Burger King' },
-        { name: 'Molly', gender: 'Female', company: 'Burger King' },
-        { name: 'Molly', gender: 'Female', company: 'Burger King' },
-        { name: 'Molly', gender: 'Female', company: 'Burger King' },
-        { name: 'Molly', gender: 'Female', company: 'Burger King' },
-        { name: 'Molly', gender: 'Female', company: 'Burger King' },
-        { name: 'Molly', gender: 'Female', company: 'Burger King' },
-        { name: 'Molly', gender: 'Female', company: 'Burger King' },
-        { name: 'Molly', gender: 'Female', company: 'Burger King' },
-        { name: 'Molly', gender: 'Female', company: 'Burger King' },
-        { name: 'Molly', gender: 'Female', company: 'Burger King' },
-        { name: 'Molly', gender: 'Female', company: 'Burger King' },
-        { name: 'Molly', gender: 'Female', company: 'Burger King' },
-        { name: 'Molly', gender: 'Female', company: 'Burger King' },
-        { name: 'Molly', gender: 'Female', company: 'Burger King' },
-        { name: 'Molly', gender: 'Female', company: 'Burger King' },
-        { name: 'Molly', gender: 'Female', company: 'Burger King' },
-        { name: 'Molly', gender: 'Female', company: 'Burger King' },
-        { name: 'Molly', gender: 'Female', company: 'Burger King' },
-        { name: 'Molly', gender: 'Female', company: 'Burger King' },
-        { name: 'Molly', gender: 'Female', company: 'Burger King' },
-        { name: 'Molly', gender: 'Female', company: 'Burger King' },
-        { name: 'Molly', gender: 'Female', company: 'Burger King' },
-        { name: 'Molly', gender: 'Female', company: 'Burger King' },
-        { name: 'Molly', gender: 'Female', company: 'Burger King' },
-        { name: 'Molly', gender: 'Female', company: 'Burger King' },
-        { name: 'Molly', gender: 'Female', company: 'Burger King' },
-        { name: 'Molly', gender: 'Female', company: 'Burger King' },
-        { name: 'Molly', gender: 'Female', company: 'Burger King' },
-      ];
-      columns = [{ prop: 'name' }, { name: 'Gender' }, { name: 'Company' }];
+    constructor(public ngxSmartModalService: NgxSmartModalService) {
+    }
 
     datesWithPositiveBalance(totalsByDate: Map<string, number>): Array<[string, number]> {
         const isPositiveDate = ( t: [string, number] ) => { return (t[1] > 0) ? true : false }
@@ -143,7 +90,6 @@ export class AppComponent {
             allPieChartData.push({name: categoryTotal[0], value: categoryTotal[1]})
         });
         
-
         /* Sort the categories */
         const sortedCategories = allPieChartData.sort((a, b) => (a.value > b.value) ? -1 : 1);
 
@@ -164,15 +110,45 @@ export class AppComponent {
     grandTotalBalance(): number {
         let grandTotal: number = 0;
         for (let transaction of this.transactions) {
-            grandTotal += transaction.amount;
-            
+            grandTotal += Number(transaction.amount);
         }
         
         return Math.round( grandTotal * 1e2 ) / 1e2;
     }
 
+    closeReport = () => {
+        this.transactions = [];
+    }
+
+    openModalWithFilter = (filterColumn: string, filterValue: string) => {
+
+        const filterColumnMap = {
+            transactionDate: 'Transaction Date',
+            desc: 'Description',
+            category: 'Category',
+            type: 'Type',
+            amount: 'Amount',
+        };
+
+        if (this.transactions) {
+            this.modalTableRowData = this.transactions.filter((transaction: transaction) => transaction[filterColumn as keyof transaction] === filterValue);
+            this.ngxSmartModalService.getModal('myModal').open()
+            this.selectedFilter = {column: filterColumnMap[filterColumn as keyof typeof filterColumnMap], value: filterValue};
+        }
+    }
+
+    onModalClose = () => {
+        this.selectedFilter = {column: '', value: ''};
+        this.modalTableRowData = [];
+    }
+
+    setModalTableRowData(newRowTableData: any) {
+        this.modalTableRowData = newRowTableData;
+    }
+
     handleImport($event: any) {
         const files = $event.target.files;
+        console.log("test");
         if (files.length) {
             const file = files[0];
             const reader = new FileReader();
@@ -181,14 +157,20 @@ export class AppComponent {
                 const sheets = wb.SheetNames;
 
                 if (sheets.length) {
-                    console.log(JSON.stringify(utils.sheet_to_json(wb.Sheets[sheets[0]], {raw:false,dateNF:'mm/dd/yyyy'})));
                     const rows: transaction[] = utils.sheet_to_json(wb.Sheets[sheets[0]], {raw:false,dateNF:'mm/dd/yyyy'});
                     this.transactions = rows;
                     
                     //  *** Testing
-                    this.transactionsByDateMap = this.transactionsByDate(rows);
+                    
+                    this.transactionsByDateMap = this.transactionsByDate(this.transactions);
                     this.totalsByDateMap = this.totalsByDate(this.transactionsByDateMap);
                     this.datesSortedByExpenseArray = this.datesSortedByExpense(this.totalsByDateMap);
+                    this.datesWithPositiveBalanceArray = this.datesWithPositiveBalance(this.totalsByDateMap);
+                    this.categorizedTransactionsArray = this.categorizedTransactions();
+                    this.grandTotalBalanceNumber = this.grandTotalBalance();
+                    this.columnsData = [{prop: 'transactionDate', name: 'Transaction Date'}, {name: 'Description', prop: 'desc'}, {name: 'Category'}, {name: 'Type'}, {name: 'Amount'}]
+                    
+                    
                     //  ***
                 }
             }
@@ -197,5 +179,6 @@ export class AppComponent {
     }
 
     ngOnInit(): void {
+        
     }
 }

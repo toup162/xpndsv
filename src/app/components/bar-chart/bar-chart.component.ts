@@ -10,12 +10,18 @@ import { DarkChart } from './dark-chart';
 export class BarChartComponent implements OnInit {
   
     @Input() totalsByDateMap?: Map<string, number>;
-    
+    @Input() openModalWithFilter?: any;
+
     theme!: string | ThemeOption;
     darkTheme = DarkChart;
     options: any;
     
     constructor() { }
+
+    onChartEvent = (event: any, columnName: string) => {
+        this.openModalWithFilter(columnName, event?.name)
+        return;
+    }
 
     ngOnInit(): void {
         this.theme = this.darkTheme;

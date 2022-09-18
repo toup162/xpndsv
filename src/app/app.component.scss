@@ -22,6 +22,26 @@ input[type="file"] {
     top: 3px;
 }
 
+:host ::ng-deep .datatable-footer .page-count {
+    font-style: italic;
+}
+
+:host ::ng-deep .datatable-body-cell-label {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+:host ::ng-deep .datatable-body-cell-label button {
+    overflow: hidden;
+    white-space: nowrap;
+    display: block;
+    text-overflow: ellipsis;
+    text-align: left;
+    max-width: 100%
+}
+
+    
 :host ::ng-deep .datatable-pager a {
     border: 1px solid #3d3d3d;
     padding: 0.25rem 0.5rem;
@@ -31,14 +51,70 @@ input[type="file"] {
     color: #fff;
     min-width: 34px;
     text-align: center;
+    &:hover {
+        background: #1c1c1c;
+        transition: 0.3s;
+    }
 }
 
 :host ::ng-deep .datatable-pager li.disabled a {
     border: 1px solid #3d3d3d;
     color: #8a8a8a;
+
+    &:hover {
+        background: transparent;
+    }
 }
 
 :host ::ng-deep .ngx-datatable .datatable-footer .datatable-pager li.pages.active a {
     background: #2a9fd6;
     cursor: default;
+}
+
+:host ::ng-deep datatable-header-cell {
+    font-weight: bold;
+    color: #fff;
+    background-color: #2a9fd6;
+    padding: 0.5rem 0.5rem;
+}
+
+:host ::ng-deep datatable-header-cell:not(:last-child) {
+    border-right: 1px solid rgba(0,0,0,0.12)
+}
+
+:host ::ng-deep datatable-body-cell {
+    padding: 6px 0.5rem;
+    background-color: var(--bs-table-bg);
+    border-bottom: 1px solid rgb(40,40,40);
+    box-shadow: inset 0 0 0 9999px rgba(255, 255, 255,.05);
+    color: #fff;
+}
+
+:host ::ng-deep .dumb-table .datatable-body {
+    min-height: 300px;
+}
+
+:host ::ng-deep .rich-table .datatable-body {
+    min-height: 397px;
+}
+
+.all-transactions-card .card-body.dashboard-card-table-container {
+    min-height: 530px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+:host ::ng-deep .nsm-dialog {
+    max-width: 100%;
+}
+
+:host ::ng-deep .nsm-content {
+    border: 1px solid #5c5c5c;
+    border-radius: 12px;
+    background-color: #1a1a1a;
+}
+
+:host ::ng-deep .nsm-dialog-btn-close {
+    color: #fff;
 }

@@ -15,9 +15,9 @@ export class GrandTotalBalanceComponent implements OnInit {
         this.formattedBalance = this.grandTotalBalance?.toString();
         
         if (this.grandTotalBalance && this.grandTotalBalance < 0) {
-            this.formattedBalance = this.formattedBalance?.replace('-', '-$');
+            this.formattedBalance = this.formattedBalance?.replace('-', '- $');
         } else {
-            this.formattedBalance = '$' + this.formattedBalance;
+            this.formattedBalance = '+ $' + this.formattedBalance;
         }
     }
 

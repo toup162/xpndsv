@@ -1,0 +1,15 @@
+<div class="card bg-light mb-3 mt-3 all-transactions-card">
+    <div class="card-header">{{selectedFilter.column}}: "<b style="color: #fff">{{selectedFilter.value}}</b>"</div>
+    <div class="card-body dashboard-card-table-container dumb-table">
+        <ngx-datatable
+            [rows]="allTransactions"
+            [columns]="columnsData"
+            [limit]="10"
+            [columnMode]="'force'"
+            [headerHeight]="50"
+            [footerHeight]="50"
+            rowHeight="auto"
+        >
+        </ngx-datatable>
+    </div>
+</div>

@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DateTableComponent } from './date-table.component';
+import { RichTableComponent } from './rich-table.component';
 
-describe('DateTableComponent', () => {
-  let component: DateTableComponent;
-  let fixture: ComponentFixture<DateTableComponent>;
+describe('RichTableComponent', () => {
+  let component: RichTableComponent;
+  let fixture: ComponentFixture<RichTableComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DateTableComponent ]
+      declarations: [ RichTableComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(DateTableComponent);
+    fixture = TestBed.createComponent(RichTableComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

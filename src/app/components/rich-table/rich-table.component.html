@@ -1,0 +1,59 @@
+<div class="card bg-light mb-3 mt-3 all-transactions-card">
+    <div class="card-header">All Transactions</div>
+    <div class="card-body dashboard-card-table-container rich-table">
+        <ngx-datatable
+            [rows]="allTransactions"
+            [columns]="columnsData"
+            [limit]="10"
+            [columnMode]="'force'"
+            [headerHeight]="50"
+            [footerHeight]="50"
+            rowHeight="auto"
+        >
+            
+            <ngx-datatable-column name="Transaction Date" [sortable]="true" prop="transactionDate">
+                <ng-template let-row="row" let-value="value" let-rowIndex="rowIndex" ngx-datatable-cell-template>
+                    <button class="transaction-button" (click)="openModalWithFilter('transactionDate', value)">
+                        {{value}}
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </button>
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Description" [sortable]="true" prop="desc">
+                <ng-template let-row="row" let-value="value" let-rowIndex="rowIndex" ngx-datatable-cell-template>
+                    <button class="transaction-button" (click)="openModalWithFilter('desc', value)">
+                        <span>{{value}}</span>
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </button>
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Category" [sortable]="true" prop="category">
+                <ng-template let-row="row" let-value="value" let-rowIndex="rowIndex" ngx-datatable-cell-template>
+                    <button class="transaction-button" (click)="openModalWithFilter('category', value)">
+                        <span>{{value}}</span>
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </button>
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Type" [sortable]="true" prop="type">
+                <ng-template let-row="row" let-value="value" let-rowIndex="rowIndex" ngx-datatable-cell-template>
+                    <button class="transaction-button" (click)="openModalWithFilter('type', value)">
+                        <span>{{value}}</span>
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </button>
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Amount" [sortable]="true" prop="amount">
+                <ng-template let-row="row" let-value="value" let-rowIndex="rowIndex" ngx-datatable-cell-template>
+                    {{value}}
+                </ng-template>
+            </ngx-datatable-column>            
+
+
+        </ngx-datatable>
+    </div>
+</div>
